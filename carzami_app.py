@@ -34,6 +34,7 @@ class ListingScraper:
     headers = {'User-Agent': 'Mozilla/5.0'}
 
     def scrape_hatla2ee(self, model, year):
+        st.write(f"🔍 Scraping Hatla2ee for: {model}")
         url = f"https://eg.hatla2ee.com/en/car/{model.lower()}/used"
         try:
             res = requests.get(url, headers=self.headers, timeout=10)
@@ -59,6 +60,7 @@ class ListingScraper:
             return []
 
     def scrape_dubizzle(self, model, year):
+        st.write(f"🔍 Scraping Dubizzle for: {model}")
         url = f"https://www.dubizzle.com.eg/en/properties/cars/{model.lower()}"
         try:
             res = requests.get(url, headers=self.headers, timeout=10)
@@ -83,6 +85,7 @@ class ListingScraper:
             return []
 
     def scrape_contactcars(self, model, year):
+        st.write(f"🔍 Scraping ContactCars for: {model}")
         url = f"https://www.contactcars.com/en/used-cars/search/{model.lower()}"
         try:
             res = requests.get(url, headers=self.headers, timeout=10)
