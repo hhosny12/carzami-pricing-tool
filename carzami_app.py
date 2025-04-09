@@ -227,9 +227,17 @@ def run_dashboard():
         scraper = ListingScraper()
         listings = scraper.aggregate_listings(model, year)
         used_model = listings[0].get('matched_model', model) if listings else model
+
         if not listings:
-            st.error("❌ No listings found. Try a different model or spelling.")
-            return
+            st.warning("⚠️ No real listings found. Using mock fallback data for demonstration.")
+            listings = [
+                {'price': 1200000, 'year': year, 'mileage': mileage, 'trim': trim, 'condition': 'Used', 'date_listed': datetime.datetime.now(), 'source': 'Mock', 'matched_model': model},
+                {'price': 1220000, 'year': year, 'mileage': mileage + 10000, 'trim': trim, 'condition': 'Used', 'date_listed': datetime.datetime.now(), 'source': 'Mock', 'matched_model': model},
+                {'price': 1180000, 'year': year, 'mileage': mileage - 5000, 'trim': trim, 'condition': 'Used', 'date_listed': datetime.datetime.now(), 'source': 'Mock', 'matched_model': model},
+                {'price': 1210000, 'year': year - 1, 'mileage': mileage + 20000, 'trim': trim, 'condition': 'Used', 'date_listed': datetime.datetime.now(), 'source': 'Mock', 'matched_model': model},
+                {'price': 1190000, 'year': year - 1, 'mileage': mileage, 'trim': trim, 'condition': 'Used', 'date_listed': datetime.datetime.now(), 'source': 'Mock', 'matched_model': model},
+                {'price': 1230000, 'year': year, 'mileage': mileage + 15000, 'trim': trim, 'condition': 'Used', 'date_listed': datetime.datetime.now(), 'source': 'Mock', 'matched_model': model}
+            ]
 
         df = preprocess_listings(listings, year, mileage, trim)
         dev_price, dev_source = fetch_developer_price(model)
