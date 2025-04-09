@@ -230,7 +230,7 @@ def run_dashboard():
 
         df = preprocess_listings(listings, year, mileage, trim)
         dev_price, dev_source = fetch_developer_price(model)
-predictor = PricePredictor(max_price_cap=dev_price)
+        predictor = PricePredictor(max_price_cap=dev_price)
         predictor.train(df)
 
         if predictor.trained:
